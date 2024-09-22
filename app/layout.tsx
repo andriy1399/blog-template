@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import MainLayout from "../components/main-layout";
 import { Sheet } from "@/components/ui/sheet";
+import SessionProvider from "@/components/providers/session-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,9 +39,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Sheet>
-            <MainLayout>{children}</MainLayout>
-          </Sheet>
+          <SessionProvider>
+            <Sheet>
+              <MainLayout>{children}</MainLayout>
+            </Sheet>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

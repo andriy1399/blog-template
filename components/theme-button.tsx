@@ -15,7 +15,7 @@ export default function ThemeButton() {
   }, []);
 
   if (!mounted) {
-    return <Skeleton className="h-9 w-9 rounded-full" />;
+    return <Skeleton className="h-9 w-9 rounded-md bg-muted" />;
   }
 
   const toggleTheme = () => {
