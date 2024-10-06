@@ -26,7 +26,7 @@ export function Header({}: HeaderProps) {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  console.log(session, status);
+
   return (
     <header className="sticky top-0 z-50 bg-header text-header-foreground shadow-md">
       <div className="container mx-auto px-4">

@@ -1,0 +1,153 @@
+/* editor.css */
+
+.ProseMirror {
+  @apply caret-foreground outline-0 pr-8 pl-28 py-16 z-0  lg:pr-8;
+}
+
+.ProseMirror .selection,
+.ProseMirror *::selection {
+  @apply bg-card/20 inline-block;
+}
+
+.ProseMirror > .react-renderer {
+  @apply my-12 first:mt-0 last:mb-0;
+}
+
+.ProseMirror.resize-cursor {
+  @apply cursor-col-resize;
+}
+
+.ProseMirror .ProseMirror-gapcursor {
+  @apply relative w-full max-w-2xl mx-auto;
+
+  &:after {
+    @apply border-t-foreground/40 w-full -top-[1.5em] max-w-2xl mx-auto left-0 right-0 content-[""] block;
+  }
+}
+
+.ProseMirror p {
+  @apply leading-relaxed my-3 first:mt-0 last:mb-0;
+}
+
+.ProseMirror > p {
+  @apply my-6 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold mt-12 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold mt-12 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-bold mt-12 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h4 {
+  @apply text-lg font-bold mt-8 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h5 {
+  @apply text-base font-bold mt-8 first:mt-0 last:mb-0;
+}
+
+.ProseMirror h6 {
+  @apply text-sm font-bold mt-8 first:mt-0 last:mb-0;
+}
+
+.ProseMirror a.link {
+  @apply text-primary font-extrabold hover:text-primary-foreground;
+}
+
+.ProseMirror mark {
+  @apply bg-destructive rounded-sm text-inherit py-1 px-0;
+}
+
+.ProseMirror img {
+  @apply h-auto w-full max-w-full rounded block;
+}
+
+.ProseMirror [data-type="horizontalRule"] {
+  @apply my-8 py-4 transition-all duration-100 ease-in-out cursor-pointer;
+
+  &.ProseMirror-selectednode {
+    @apply bg-muted;
+  }
+
+  &:hover:not(&.ProseMirror-selectednode) {
+    @apply bg-muted;
+  }
+
+  hr {
+    @apply border-0 border-t border-border bg-muted;
+  }
+}
+
+.ProseMirror .tableWrapper {
+  @apply my-12;
+}
+
+.ProseMirror table {
+  @apply border-collapse border border-border rounded box-border w-full;
+}
+
+.ProseMirror td,
+.ProseMirror th {
+  @apply border border-border min-w-[100px] p-2 relative text-left align-top;
+}
+
+.ProseMirror th {
+  @apply font-bold;
+}
+
+.ProseMirror code {
+  @apply caret-foreground text-foreground bg-muted rounded-sm shadow-lg font-mono;
+}
+
+.ProseMirror pre {
+  @apply caret-foreground bg-muted text-foreground rounded my-12 p-4 border border-border;
+}
+
+.ProseMirror blockquote {
+  @apply m-0 my-14 text-foreground border-l-4 border-muted pl-4;
+
+  & > * {
+    @apply first:mt-0 last:mb-0;
+  }
+}
+
+.ProseMirror ol {
+  @apply list-decimal py-0 px-8 my-6 first:mt-0 last:mb-0;
+}
+
+.ProseMirror ul {
+  @apply list-disc py-0 px-8 my-6 first:mt-0 last:mb-0;
+}
+
+.ProseMirror ul,
+.ProseMirror ol,
+.ProseMirror li {
+  @apply my-1;
+}
+
+.ProseMirror ul[data-type="taskList"] {
+  @apply list-none p-0;
+
+  li {
+    @apply flex;
+  }
+
+  li[data-checked="true"] {
+    @apply line-through;
+  }
+}
+
+.ProseMirror .is-empty::before {
+  @apply text-foreground/40 float-left h-0 pointer-events-none w-full content-["Click_here_to_start_writing_…"];
+}
+
+.ProseMirror.ProseMirror-focused > p.has-focus.is-empty::before {
+  content: "Type  /  to browse options";
+}
