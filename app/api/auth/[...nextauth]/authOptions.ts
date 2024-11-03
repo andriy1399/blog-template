@@ -72,11 +72,15 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
-      console.log("Session callback:", session, token);
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
       return session;
     },
     async jwt({ token, user }) {
-      console.log("JWT callback:", token, user);
+      if (user) {
+        token.sub = user.id;
+      }
       return token;
     },
     async signIn({ user, account }) {
@@ -94,6 +98,7 @@ export const authOptions: AuthOptions = {
               provider: account?.provider,
               providerAccountId:
                 account?.id ?? account?.providerAccountId ?? null,
+              _id: account?.id ?? account?.providerAccountId ?? undefined,
               picture: user.image,
             });
             console.log("New user created:", newUser);

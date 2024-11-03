@@ -9,4 +9,12 @@ export const postSchema = z.object({
   content: z
     .string()
     .min(10, { message: "Content must be at least 10 characters." }),
+  tags: z
+    .array(
+      z.object({
+        value: z.string(),
+        label: z.string(),
+      })
+    )
+    .min(1, { message: "At least one tag is required." }),
 });

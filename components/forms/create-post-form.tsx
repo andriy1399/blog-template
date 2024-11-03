@@ -15,6 +15,8 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import TagsMultiSelect from "../common/tags-multi-select";
+import axios from "axios";
 type PostFormData = z.infer<typeof postSchema>;
 
 const CreatePostForm = () => {
@@ -24,19 +26,19 @@ const CreatePostForm = () => {
       title: "",
       coverImage: "",
       content: "",
+      tags: [],
     },
   });
 
-  const {
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-  } = form;
+  const { handleSubmit, control, setValue } = form;
 
-  const onSubmit = (data: PostFormData) => {
-    console.log("Form Data:", data);
-    // Handle form submission, e.g., send to API
+  const onSubmit = async (data: PostFormData) => {
+    try {
+      const response = await axios.post("/api/posts", data);
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   return (
     <Form {...form}>
@@ -55,25 +57,41 @@ const CreatePostForm = () => {
             </FormItem>
           )}
         />
-
-        <FormField
-          control={control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <div className="pr-8 pl-28 pb-16 pt-8 z-0 lg:pr-8">
+        <div className="pr-8 pl-28 pb-16 pt-8 z-0 lg:pr-8">
+          <FormField
+            control={control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
                   <Input
                     placeholder="New Post Title ..."
-                    className="bg-transparent focus-visible:ring-0 text-4xl px-0 font-bold w-full focus:outline-none border-none focus:border-none focus:shadow-none shadow-none"
+                    className="bg-transparent focus-visible:ring-0 text-4xl px-0 font-bold w-full focus:outline-none border-none focus:border-none focus:shadow-none shadow-none mb-3"
                     {...field}
                   />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="tags"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <TagsMultiSelect
+                    maxSelected={3}
+                    placeholder="Select tags..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <hr />
         <FormField
           control={control}
